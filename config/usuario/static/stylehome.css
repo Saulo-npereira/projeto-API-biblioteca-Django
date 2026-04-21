@@ -1,0 +1,96 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+}
+
+/* container */
+.container {
+    padding: 20px;
+}
+
+/* título */
+h1 {
+    text-align: center;
+}
+
+/* mensagens */
+.msg {
+    color: green;
+    text-align: center;
+}
+
+/* busca */
+.search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search button {
+    margin-left: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: #0056b3;
+}
+
+/* layout principal */
+.content {
+    display: flex;
+    gap: 30px;
+}
+
+/* colunas */
+.livros, .emprestimos {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* links */
+.livros a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.livros a:hover {
+    text-decoration: underline;
+}
+
+/* card emprestimo */
+.card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* botão renovar */
+.card button {
+    padding: 8px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background-color: #218838;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ livro.titulo }}</title>
+
+    <link rel="stylesheet" href="{% static 'stylelivro.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>{{ livro.titulo }}</h1>
+
+        <div class="info">
+            <p><strong>Autor:</strong> {{ livro.autor }}</p>
+            <p><strong>ISBN:</strong> {{ livro.isbn }}</p>
+            <p><strong>Categoria:</strong> {{ livro.categoria }}</p>
+            <p><strong>Descrição:</strong> {{ livro.descricao }}</p>
+            <p><strong>Estoque:</strong> {{ livro.quantidade_disponivel }}</p>
+        </div>
+
+        <!-- ações -->
+        <div class="acoes">
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="acao" value="pegar" class="btn pegar">
+                    Pegar emprestado
+                </button>
+            </form>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" name="acao" value="devolver" class="btn devolver">
+                    Devolver
+                </button>
+            </form>
+
+        </div>
+
+        <!-- mensagem -->
+        {% if message %}
+            <p class="msg">{{ message }}</p>
+        {% endif %}
+
+        <!-- voltar -->
+        <a href="/" class="voltar">← Voltar</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

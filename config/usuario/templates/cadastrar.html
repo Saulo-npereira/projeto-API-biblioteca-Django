@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar</title>
+    <link rel="stylesheet" href="{% static 'stylecadastrar.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Cadastrar</h1>
+
+        <a href="{% url 'login' %}" class="link-login">Ir para login</a>
+
+        <form method="post" class="form">
+            {% csrf_token %}
+
+            <input type="text" name="nome" placeholder="Nome..." required>
+            <input type="email" name="email" placeholder="Email..." required>
+            <input type="password" name="senha" placeholder="Senha..." required>
+
+            <button type="submit">Criar Usuário</button>
+        </form>
+
+        {% if success %}
+            <p class="success">{{data.message}}</p>
+        {% else %}
+            <p class="error">{{error}}</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

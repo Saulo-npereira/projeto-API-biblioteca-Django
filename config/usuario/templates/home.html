@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+
+    <link rel="stylesheet" href="{% static 'stylehome.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Biblioteca</h1>
+
+    <!-- mensagens -->
+    {% if messages %}
+        {% for message in messages %}
+            <p class="msg">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <!-- busca -->
+    <form method="POST" class="search">
+        {% csrf_token %}
+        <input type="text" name="livro" placeholder="Buscar livro">
+        <button type="submit" name="acao" value="pesquisa">Buscar</button>
+    </form>
+
+    <div class="content">
+
+        <!-- livros -->
+        <div class="livros">
+            <h2>Livros</h2>
+
+            {% for livro in livros %}
+                <h4>
+                    <a href="{% url 'livro' livro.id %}">
+                        {{ livro.titulo }} - {{livro.autor}}
+                    </a>
+                </h4>
+            {% endfor %}
+        </div>
+
+        <!-- emprestimos -->
+        <div class="emprestimos">
+            <h2>Seus Empréstimos</h2>
+
+            {% if emprestimos %}
+                {% for emprestimo in emprestimos %}
+                    <div class="card">
+                        <h4>livro: {{ emprestimo.livro }}</h4>
+                        <h4>status: {{ emprestimo.status }}</h4>
+                        <h4>data de emprestimo: {{ emprestimo.data_emprestimo }}</h4>
+                        <h4>data prevista de devolução: {{ emprestimo.data_devolucao_prevista }}</h4>
+
+                        <form method="POST" action="{% url 'renovar' emprestimo.id %}">
+                            {% csrf_token %}
+                            <button type="submit">Renovar</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Você ainda não possui empréstimos</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
