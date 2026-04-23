@@ -13,6 +13,7 @@ def login_required(view_func):
 
         return view_func(request, *args, **kwargs)
 
+
     return wrapper
 
 def teste(request):
@@ -32,14 +33,23 @@ def logar(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        data = logar_usuario(email, senha)
+        data = logar_usuario(request, email, senha)
 
-        if data['success']:
-            request.session['token'] = data['data']['access_token']
-            request.session['refresh_token'] = data['data']['refresh_token']
+        if data.get('message') == 'Login feito com sucesso':
+            request.session['token'] = data['access_token']
+            request.session['refresh_token'] = data['refresh_token']
+            user = {
+            "id": data.get('id_usuario'),
+            "username": data.get('nome_usuario'),
+            "admin": data.get('admin')
+            }
+
+            request.session['user'] = user
+            if user['admin']:
+                return redirect('adicionar_livro')
             return redirect('home')
         
-        return render(request, 'login.html', {'error': data['error']})
+        return render(request, 'login.html', {'error': data['detail']})
     
     return render(request, 'login.html')
 
