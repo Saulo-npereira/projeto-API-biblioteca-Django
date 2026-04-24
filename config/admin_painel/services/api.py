@@ -55,3 +55,19 @@ def adicionar_livro_api(titulo:str, autor:str, descricao: str, isbn: str, catego
     "quantidade_disponivel": quant_disp
         })
     return response.json()
+
+def quantos_usuarios(request):
+    response = fazer_request(request, 'GET', f'{BASE_URL}usuarios/quantos_usuario')
+    return response.json()
+
+def deletar_livro_api(request, id_livro):
+    response = fazer_request(request, 'DELETE', f'{BASE_URL}bibliotecas/deletar_livro/{id_livro}')
+    return response.json()
+
+def listar_livros():
+    response = requests.get(f"{BASE_URL}bibliotecas/listar_livros")
+    return response.json()
+
+def editar_estoque(request, id_livro, quantidade):
+    response = fazer_request(request, 'POST', f'{BASE_URL}bibliotecas/editar_estoque/{id_livro}/{quantidade}')
+    return response.json()
