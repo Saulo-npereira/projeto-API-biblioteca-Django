@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="{% url 'manlivro' %}">Voltar</a>
     <h1>Editar o Estoque</h1>
     <form action="" method="post">{% csrf_token %}
         <input type="number" name="quantidade">

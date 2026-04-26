@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .services.api import adicionar_livro_api, quantos_usuarios, deletar_livro_api, listar_livros, editar_estoque
+from .services.api import adicionar_livro_api, quantos_usuarios, deletar_livro_api, listar_livros, editar_estoque, buscar_emprestimo, buscar_livro
+from .services.api import listar_usuario, deletar_usuario_api, buscar_usuario, buscar_usuario_id, listar_emp_ativo, listar_emp_atrasados
 
 def admin_required(view_func):
     def wrapper(request, *args, **kwargs):
@@ -22,14 +23,24 @@ def homeadmin(request):
 def manipular_livro(request):
     livros = listar_livros()
     if request.method == 'POST':
-        titulo = request.POST.get('titulo')
-        autor = request.POST.get('autor')
-        descricao = request.POST.get('desc')
-        isbn = request.POST.get('isbn')
-        categoria = request.POST.get('cate')
-        quant_disp = request.POST.get('quant_disp')
-        response = adicionar_livro_api(titulo=titulo, autor=autor, descricao=descricao, isbn=isbn, categoria=categoria, quant_disp=quant_disp, request=request)
-        return render(request, 'manipularlivros.html', {'response': response, 'livros': livros.get('livros')})
+        acao = request.POST.get('acao')
+
+        if acao == 'adicionar':
+            titulo = request.POST.get('titulo')
+            autor = request.POST.get('autor')
+            descricao = request.POST.get('desc')
+            isbn = request.POST.get('isbn')
+            categoria = request.POST.get('cate')
+            quant_disp = request.POST.get('quant_disp')
+            response = adicionar_livro_api(titulo=titulo, autor=autor, descricao=descricao, isbn=isbn, categoria=categoria, quant_disp=quant_disp, request=request)
+            return render(request, 'manipularlivros.html', {'response': response, 'livros': livros.get('livros')})
+        elif acao == 'buscar':
+            livro = request.POST.get('titulo')
+            response = buscar_livro(request, livro)
+            if response.get('livro'):
+
+                return render(request, 'manipularlivros.html', {'livros': [response.get('livro')]})
+            return render(request, 'manipularlivros.html', {'livros': livros.get('livros'), 'message': response.get('detail')})
     return render(request, 'manipularlivros.html', {'livros': livros.get('livros')})
 
 @admin_required
@@ -46,5 +57,52 @@ def editar_estoque_livro(request, id_livro):
             return render(request, 'edestoque.html', response)
         return redirect('manlivro')
     return render(request, 'edestoque.html')
+
+@admin_required
+def manipular_usuario(request):
+    usuarios = listar_usuario(request)
+    if request.method == 'POST':
+        email = request.POST.get('usuario')
+        usuario = buscar_usuario(request, email)
+        if usuario.get('detail'): 
+            return render(request, 'manipularusuario.html', {'usuarios': usuarios.get('usuarios'), 'message': usuario.get('detail')})
+        return redirect('usuario', usuario['usuario'].get('id'))
+    return render(request, 'manipularusuario.html', usuarios)
+
+@admin_required
+def deletar_usuario(request, id_usuario):
+    deletar_usuario_api(request, id_usuario)
+    return redirect('manusuario')
+
+@admin_required
+def usuario(request, id_usuario):
+    usuario = buscar_usuario_id(request, id_usuario)
+    return render(request, 'usuario.html', usuario)
+
+@admin_required
+def manipular_emprestimo(request):
+    emps_ativos = listar_emp_ativo(request)
+    emps_atrasados = listar_emp_atrasados(request)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        usuario = buscar_usuario(request, email)
+        if usuario.get('detail'):
+            return render(request, 'manipularemprestimo.html', {'emps_ativos': emps_ativos.get('emprestimos_ativos'),
+                                                         'emps_atrasados': emps_atrasados.get('emprestimos_atrasados'),
+                                                         'message': emps_atrasados.get('message'),
+                                                         'detail': usuario.get('detail')})
+        emprestimos = buscar_emprestimo(request, usuario['usuario'].get('id'))
+        if emprestimos.get('detail'):
+            return render(request, 'manipularemprestimo.html', {'emps_ativos': emps_ativos.get('emprestimos_ativos'),
+                                                         'emps_atrasados': emps_atrasados.get('emprestimos_atrasados'),
+                                                         'message': emps_atrasados.get('message'),
+                                                         'detail': emprestimos.get('detail')})
+        return render(request, 'emprestimosalguem.html', emprestimos)
+
+    return render(request, 'manipularemprestimo.html', {'emps_ativos': emps_ativos.get('emprestimos_ativos'),
+                                                         'emps_atrasados': emps_atrasados.get('emprestimos_atrasados'),
+                                                         'message': emps_atrasados.get('message')})
+
         
+
         

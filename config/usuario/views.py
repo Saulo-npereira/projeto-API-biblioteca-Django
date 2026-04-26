@@ -46,7 +46,7 @@ def logar(request):
 
             request.session['user'] = user
             if user['admin']:
-                return redirect('adicionar_livro')
+                return redirect('homeadmin')
             return redirect('home')
         
         return render(request, 'login.html', {'error': data['detail']})

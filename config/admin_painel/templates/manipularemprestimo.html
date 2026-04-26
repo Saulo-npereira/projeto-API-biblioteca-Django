@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'homeadmin' %}">Voltar</a>
+    <form action="" method="post"> {% csrf_token %}
+        <label for="">proucurar emprestimo por email:</label>
+        <input type="text" name="email" placeholder="Digite o email">
+        <button type="submit">Buscar</button>
+    </form>
+    <p style="color: red;">{{detail}}</p>
+    <h1>emprestimos ativos: </h1>
+    {% for emp_ativo in emps_ativos %}
+        <p>{{emp_ativo.usuario}} pegou emprestado o livro {{emp_ativo.livro}}</p>
+    {% endfor %}
+    <h1>emprestimos atrasados: </h1>
+    {% for emp_atrasado in emps_atrasados %}
+        <p>{{emp_atrasado}}</p>
+    {% endfor %}
+    {% if message %}
+        <p>{{message}}</p>
+    {% endif %}
+    
+</body>
+</html>

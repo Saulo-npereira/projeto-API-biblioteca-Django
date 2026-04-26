@@ -71,3 +71,35 @@ def listar_livros():
 def editar_estoque(request, id_livro, quantidade):
     response = fazer_request(request, 'POST', f'{BASE_URL}bibliotecas/editar_estoque/{id_livro}/{quantidade}')
     return response.json()
+
+def listar_usuario(request):
+    response = fazer_request(request, 'GET', f'{BASE_URL}usuarios/listar_usuarios')
+    return response.json()
+
+def deletar_usuario_api(request, id_usuario):
+    response = fazer_request(request, 'DELETE', f'{BASE_URL}usuarios/deletar_usuario/{id_usuario}')
+    return response.json()
+
+def buscar_usuario(request, email):
+    response = fazer_request(request, 'GET', f'{BASE_URL}usuarios/buscar_usuario_email/{email}')
+    return response.json()
+
+def buscar_usuario_id(request, id_usuario):
+    response = fazer_request(request, 'GET', f'{BASE_URL}usuarios/buscar_usuario_id/{id_usuario}')
+    return response.json()
+
+def listar_emp_ativo(request):
+    response = fazer_request(request, 'GET', f'{BASE_URL}emprestimos/listar_emprestimos_ativos')
+    return response.json()
+
+def listar_emp_atrasados(request):
+    response = fazer_request(request, 'GET', f'{BASE_URL}emprestimos/listar_atrasados')
+    return response.json()
+
+def buscar_emprestimo(request, id):
+    response = fazer_request(request, 'GET', f'{BASE_URL}emprestimos/emprestimos_usuario/{id}')
+    return response.json()
+
+def buscar_livro(request, titulo):
+    response = fazer_request(request, 'GET', f'{BASE_URL}bibliotecas/buscar_livro_titulo/{titulo}')
+    return response.json()

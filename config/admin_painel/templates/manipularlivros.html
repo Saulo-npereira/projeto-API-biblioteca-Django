@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="{% url 'homeadmin' %}">Voltar</a>
     <h1>Painel de livro</h1>
     <form action="" method="post"> {% csrf_token %}
         <input type="text" name="titulo" placeholder="titulo...">
@@ -14,8 +15,17 @@
         <input type="text" name="cate" placeholder="categoria...">
         <input type="text" name="isbn" placeholder="ISBN...">
         <input type="text" name="quant_disp" placeholder="Quantidade disponivel...">
-        <button type="submit">Adicionar Livro</button>
+        <button type="submit" name="acao" value="adicionar">Adicionar Livro</button>
     </form>
+    <form action="" method="post"> {% csrf_token %}
+        <label for="">Buscar livro:</label>
+        <input type="text" name="titulo" placeholder="titulo...">
+        <button type="submit" name="acao" value="buscar">Buscar livro</button>
+    </form>
+    {% if message %}
+        <p>{{message}}</p>
+    {% endif %}
+    
     {% for livro in livros %}
         <a href="{% url 'livro' livro.id %}">
                         {{ livro.titulo }} - {{livro.autor}}
@@ -25,6 +35,5 @@
         <br>
         <br>
     {% endfor %}
-    <a href="{% url 'homeadmin' %}">Voltar</a>
 </body>
 </html>

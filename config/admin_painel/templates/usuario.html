@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'manusuario' %}"></a>
+    <h1>Informações de {{usuario.nome}}</h1>
+    <p>nome: {{usuario.nome}}</p>
+    <p>email: {{usuario.email}}</p>
+    <p>id: {{usuario.id}}</p>
+    <p>admin: {{usuario.admin}}</p>
+    <a href="{% url 'manusuario' %}">Voltar</a>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'homeadmin' %}">Voltar</a>
+    <h1>Painel de usuários</h1>
+    <form action="" method="post"> {% csrf_token %}
+        <input type="text" name="usuario" placeholder="Buscar usuario por email...">
+        <button type="submit">Buscar</button>
+    </form>
+    <p>{{message}}</p>
+    {% for usuario in usuarios %}
+        <p>{{usuario.nome}} - {{usuario.email}}</p>
+        <a href="{% url 'delusuario' usuario.id %}">Deletar usuario</a>
+    {% endfor %}
+</body>
+</html>
