@@ -1,0 +1,56 @@
+/* BASE */
+body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f5f7fb;
+    margin: 0;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    text-decoration: none;
+    color: #2563eb;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 15px;
+}
+
+/* TEXTO */
+small {
+    color: #64748b;
+}
+
+/* ATRASO */
+.danger {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    color: #64748b;
+}

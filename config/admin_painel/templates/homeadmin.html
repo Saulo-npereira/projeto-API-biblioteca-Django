@@ -1,18 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Painel Admin</title>
+    <link rel="stylesheet" href="{% static 'admin.css' %}">
 </head>
 <body>
-    <h1>PAINEL ADMIN</h1>
-    
-    <p>Quantos livros no sistema: {{qnts_livros}}</p>
-    <a href="{% url 'manlivro' %}">Manipular Livros</a>
-    <p>Quantos usuarios no sistema: {{qnts_usuarios}}</p>
-    <a href="{% url 'manusuario' %}">Manipular Usuarios</a>
-    <p>Quantos emprestimos no sistema: {{qnts_emprestimos}}</p>
-    <a href="{% url 'manemprestimo' %}">Manipular Emprestimos</a>
+
+    <header class="header">
+        <h1>Painel Administrativo</h1>
+    </header>
+
+    <main class="container">
+        
+        <div class="card">
+            <h2>Livros</h2>
+            <p class="number">{{qnts_livros}}</p>
+            <a class="btn" href="{% url 'manlivro' %}">Gerenciar</a>
+        </div>
+
+        <div class="card">
+            <h2>Usuários</h2>
+            <p class="number">{{qnts_usuarios}}</p>
+            <a class="btn" href="{% url 'manusuario' %}">Gerenciar</a>
+        </div>
+
+        <div class="card">
+            <h2>Empréstimos</h2>
+            <p class="number">{{qnts_emprestimos}}</p>
+            <a class="btn" href="{% url 'manemprestimo' %}">Gerenciar</a>
+        </div>
+
+    </main>
+
 </body>
 </html>

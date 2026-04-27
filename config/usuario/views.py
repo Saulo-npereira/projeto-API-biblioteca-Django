@@ -16,7 +16,7 @@ def login_required(view_func):
 
     return wrapper
 
-def teste(request):
+def cadastrar(request):
     if request.method == 'POST':
         nome = request.POST.get('nome')
         email = request.POST.get('email')

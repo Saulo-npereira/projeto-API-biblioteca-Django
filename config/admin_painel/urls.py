@@ -10,4 +10,5 @@ urlpatterns = [
     path('delusuario/<int:id_usuario>/', views.deletar_usuario, name='delusuario'),
     path('usuario/<int:id_usuario>/', views.usuario, name='usuario'),
     path('emprestimos/', views.manipular_emprestimo, name='manemprestimo'),
+    path('renovar/<int:emp_id>/', views.renovar, name='renovar')
 ]

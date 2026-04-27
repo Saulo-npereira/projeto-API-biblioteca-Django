@@ -1,21 +1,65 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Painel de Usuários</title>
+    <link rel="stylesheet" href="{% static 'manusuario.css' %}">
 </head>
 <body>
-    <a href="{% url 'homeadmin' %}">Voltar</a>
-    <h1>Painel de usuários</h1>
-    <form action="" method="post"> {% csrf_token %}
-        <input type="text" name="usuario" placeholder="Buscar usuario por email...">
-        <button type="submit">Buscar</button>
-    </form>
-    <p>{{message}}</p>
-    {% for usuario in usuarios %}
-        <p>{{usuario.nome}} - {{usuario.email}}</p>
-        <a href="{% url 'delusuario' usuario.id %}">Deletar usuario</a>
-    {% endfor %}
+
+    <header class="header">
+        <a href="{% url 'homeadmin' %}" class="back-btn">← Voltar</a>
+        <h1>Painel de Usuários</h1>
+    </header>
+
+    <main class="container">
+
+        <!-- BUSCA -->
+        <div class="card">
+            <h2>Buscar usuário</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="usuario" placeholder="Buscar por email..." required>
+                <button type="submit" class="btn">Buscar</button>
+            </form>
+        </div>
+
+        <!-- MENSAGEM -->
+        {% if message %}
+            <p class="message">{{message}}</p>
+        {% endif %}
+
+        <!-- LISTA -->
+        <div class="card">
+            <h2>Usuários</h2>
+
+            {% for usuario in usuarios %}
+                <div class="list-item">
+
+                    <div class="info">
+                        <a href="{% url 'usuario' usuario.id %}">
+                            <strong>{{usuario.nome}}</strong><br>
+                            <small>{{usuario.email}}</small>
+                        </a>
+                    </div>
+
+                    <div class="actions">
+                        <a href="{% url 'delusuario' usuario.id %}" 
+                           class="btn danger small"
+                           onclick="return confirm('Tem certeza que deseja deletar este usuário?')">
+                           Deletar
+                        </a>
+                    </div>
+
+                </div>
+            {% empty %}
+                <p class="empty">Nenhum usuário encontrado.</p>
+            {% endfor %}
+        </div>
+
+    </main>
+
 </body>
 </html>

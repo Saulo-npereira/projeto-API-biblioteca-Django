@@ -1,0 +1,145 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* BODY */
+body {
+    background-color: #f5f7fb;
+    color: #1e293b;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.back-btn {
+    position: absolute;
+    left: 20px;
+    text-decoration: none;
+    color: #2563eb;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+}
+
+/* FORMS */
+.forms {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5f5;
+}
+
+input:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+/* BOTÕES */
+.btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn.secondary {
+    background-color: #22c55e;
+}
+
+.btn.danger {
+    background-color: #ef4444;
+}
+
+.btn.small {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+/* LISTA */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+}
+
+.list-item.danger {
+    border-color: #fecaca;
+    background-color: #fff1f2;
+}
+
+/* ALERTAS */
+.alert {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fef3c7;
+    border: 1px solid #fde68a;
+}
+
+/* DETALHE */
+.detail {
+    color: #dc2626;
+    text-align: center;
+}
+
+/* TITULO PERIGO */
+.danger-title {
+    color: #dc2626;
+}
+
+/* VAZIO */
+.empty {
+    text-align: center;
+    color: #64748b;
+}

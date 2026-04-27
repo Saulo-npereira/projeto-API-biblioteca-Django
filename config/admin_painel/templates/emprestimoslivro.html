@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empréstimos do Livro</title>
+    <link rel="stylesheet" href="{% static 'emprestimoslivro.css' %}">
+</head>
+<body>
+
+    <header class="header">
+        <a href="{% url 'manemprestimo' %}" class="back-btn">← Voltar</a>
+        {% if emprestimos %}
+            <h1>Empréstimos de {{emprestimos.0.livro}}</h1>
+        {% else %}
+            <h1>Empréstimos do livro</h1>
+        {% endif %}
+    </header>
+
+    <main class="container">
+
+        {% for emprestimo in emprestimos %}
+            <div class="card">
+
+                <div class="info">
+                    <p>
+                        <strong>{{emprestimo.usuario}}</strong> pegou 
+                        <strong>{{emprestimo.livro}}</strong>
+                    </p>
+
+                    <small>
+                        Status: {{emprestimo.status}} |
+                        Multa: R$ {{emprestimo.multa}}
+                    </small>
+
+                    <br>
+
+                    <small>
+                        Empréstimo: {{emprestimo.data_emprestimo}} <br>
+                        Devolução prevista: {{emprestimo.data_devolucao_prevista}}
+                    </small>
+                </div>
+
+            </div>
+        {% empty %}
+            <p class="empty">Nenhum empréstimo encontrado.</p>
+        {% endfor %}
+
+    </main>
+
+</body>
+</html>

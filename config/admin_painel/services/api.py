@@ -103,3 +103,11 @@ def buscar_emprestimo(request, id):
 def buscar_livro(request, titulo):
     response = fazer_request(request, 'GET', f'{BASE_URL}bibliotecas/buscar_livro_titulo/{titulo}')
     return response.json()
+
+def buscar_emprestimo_livro(request, titulo):
+    response = fazer_request(request, 'GET', f'{BASE_URL}emprestimos/emprestimos_livro/{titulo}')
+    return response.json()
+
+def renovar_emprestimo_api(request, id_emprestimo):
+    response = fazer_request(request, 'POST', f'{BASE_URL}emprestimos/renovar_emprestimo/{id_emprestimo}')
+    return response.json()

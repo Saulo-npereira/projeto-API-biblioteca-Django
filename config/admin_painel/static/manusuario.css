@@ -1,0 +1,143 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* BODY */
+body {
+    background-color: #f5f7fb;
+    color: #1e293b;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    background-color: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
+/* VOLTAR */
+.back-btn {
+    position: absolute;
+    left: 20px;
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+}
+
+/* FORM */
+form {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5f5;
+}
+
+input:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+/* BOTÕES */
+.btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #1d4ed8;
+}
+
+.btn.small {
+    padding: 6px 10px;
+    font-size: 12px;
+}
+
+.btn.danger {
+    background-color: #ef4444;
+}
+
+.btn.danger:hover {
+    background-color: #dc2626;
+}
+
+/* LISTA */
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+}
+
+.info a {
+    text-decoration: none;
+    color: #1e293b;
+}
+
+.info a:hover {
+    color: #2563eb;
+}
+
+/* MENSAGEM */
+.message {
+    text-align: center;
+    padding: 10px;
+    background-color: #e0f2fe;
+    border: 1px solid #bae6fd;
+    border-radius: 6px;
+    color: #0369a1;
+}
+
+/* VAZIO */
+.empty {
+    text-align: center;
+    color: #64748b;
+}

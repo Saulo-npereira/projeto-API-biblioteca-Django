@@ -1,39 +1,82 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Painel de Livros</title>
+    <link rel="stylesheet" href="{% static 'manlivro.css' %}">
 </head>
 <body>
-    <a href="{% url 'homeadmin' %}">Voltar</a>
-    <h1>Painel de livro</h1>
-    <form action="" method="post"> {% csrf_token %}
-        <input type="text" name="titulo" placeholder="titulo...">
-        <input type="text" name="autor" placeholder="autor...">
-        <input type="text" name="desc" placeholder="descrição...">
-        <input type="text" name="cate" placeholder="categoria...">
-        <input type="text" name="isbn" placeholder="ISBN...">
-        <input type="text" name="quant_disp" placeholder="Quantidade disponivel...">
-        <button type="submit" name="acao" value="adicionar">Adicionar Livro</button>
-    </form>
-    <form action="" method="post"> {% csrf_token %}
-        <label for="">Buscar livro:</label>
-        <input type="text" name="titulo" placeholder="titulo...">
-        <button type="submit" name="acao" value="buscar">Buscar livro</button>
-    </form>
-    {% if message %}
-        <p>{{message}}</p>
-    {% endif %}
-    
-    {% for livro in livros %}
-        <a href="{% url 'livro' livro.id %}">
-                        {{ livro.titulo }} - {{livro.autor}}
-                    </a>
-        <a href="{% url 'dellivro' livro.id %}">Deletar Livro</a>
-        <a href="{% url 'edestoque' livro.id %}">Editar Estoque Do Livro</a>
-        <br>
-        <br>
-    {% endfor %}
+
+    <header class="header">
+        <a href="{% url 'homeadmin' %}" class="back-btn">← Voltar</a>
+        <h1>Painel de Livros</h1>
+    </header>
+
+    <main class="container-column">
+
+        <!-- FORM ADICIONAR -->
+        <div class="card form-card">
+            <h2>Adicionar Livro</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <input type="text" name="titulo" placeholder="Título..." required>
+                <input type="text" name="autor" placeholder="Autor..." required>
+                <input type="text" name="desc" placeholder="Descrição...">
+                <input type="text" name="cate" placeholder="Categoria...">
+                <input type="text" name="isbn" placeholder="ISBN...">
+                <input type="number" name="quant_disp" placeholder="Quantidade disponível..." min="0">
+
+                <button type="submit" name="acao" value="adicionar" class="btn">
+                    Adicionar Livro
+                </button>
+            </form>
+        </div>
+
+        <!-- FORM BUSCAR -->
+        <div class="card form-card">
+            <h2>Buscar Livro</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <input type="text" name="titulo" placeholder="Digite o título..." required>
+
+                <button type="submit" name="acao" value="buscar" class="btn secondary">
+                    Buscar
+                </button>
+            </form>
+        </div>
+
+        <!-- MENSAGEM -->
+        {% if message %}
+            <p class="message">{{message}}</p>
+        {% endif %}
+
+        <!-- LISTA DE LIVROS -->
+        <div class="card list-card">
+            <h2>Lista de Livros</h2>
+
+            {% for livro in livros %}
+                <div class="list-item">
+                    <div class="info">
+                        <a href="{% url 'livro' livro.id %}">
+                            <strong>{{ livro.titulo }}</strong> - {{livro.autor}}
+                        </a>
+                    </div>
+
+                    <div class="actions">
+                        <a href="{% url 'edestoque' livro.id %}" class="btn small">Estoque</a>
+                        <a href="{% url 'dellivro' livro.id %}" class="btn danger small">Deletar</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty">Nenhum livro encontrado.</p>
+            {% endfor %}
+        </div>
+
+    </main>
+
 </body>
 </html>

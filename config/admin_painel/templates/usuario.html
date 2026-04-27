@@ -1,17 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Usuário</title>
+    <link rel="stylesheet" href="{% static 'usuario.css' %}">
 </head>
 <body>
-    <a href="{% url 'manusuario' %}"></a>
-    <h1>Informações de {{usuario.nome}}</h1>
-    <p>nome: {{usuario.nome}}</p>
-    <p>email: {{usuario.email}}</p>
-    <p>id: {{usuario.id}}</p>
-    <p>admin: {{usuario.admin}}</p>
-    <a href="{% url 'manusuario' %}">Voltar</a>
+
+    <header class="header">
+        <a href="{% url 'manusuario' %}" class="back-btn">← Voltar</a>
+        <h1>Detalhes do Usuário</h1>
+    </header>
+
+    <main class="container">
+
+        <div class="card">
+
+            <h2>{{usuario.nome}}</h2>
+
+            <div class="info-group">
+                <span class="label">Nome</span>
+                <span class="value">{{usuario.nome}}</span>
+            </div>
+
+            <div class="info-group">
+                <span class="label">Email</span>
+                <span class="value">{{usuario.email}}</span>
+            </div>
+
+            <div class="info-group">
+                <span class="label">Data de criação</span>
+                <span class="value">{{usuario.data_criacao}}</span>
+            </div>
+
+            <div class="info-group">
+                <span class="label">ID</span>
+                <span class="value">{{usuario.id}}</span>
+            </div>
+
+            <div class="info-group">
+                <span class="label">Admin</span>
+                <span class="value">{{usuario.admin}}</span>
+            </div>
+
+        </div>
+
+    </main>
+
 </body>
 </html>

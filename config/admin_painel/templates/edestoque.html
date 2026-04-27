@@ -1,17 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Estoque</title>
+    <link rel="stylesheet" href="{% static 'edestoque.css' %}">
 </head>
 <body>
-    <a href="{% url 'manlivro' %}">Voltar</a>
-    <h1>Editar o Estoque</h1>
-    <form action="" method="post">{% csrf_token %}
-        <input type="number" name="quantidade">
-        <button type="submit">Editar</button>
-        {{detail}}
-    </form>
+
+    <header class="header">
+        <a href="{% url 'manlivro' %}" class="back-btn">← Voltar</a>
+        <h1>Editar Estoque</h1>
+    </header>
+
+    <main class="container">
+
+        <div class="card">
+            <h2>Atualizar quantidade</h2>
+
+            <form action="" method="post">
+                {% csrf_token %}
+
+                <input type="number" name="quantidade" placeholder="Nova quantidade..." min="0" required>
+
+                <button type="submit" class="btn">
+                    Atualizar
+                </button>
+            </form>
+
+            {% if detail %}
+                <p class="message">{{detail}}</p>
+            {% endif %}
+        </div>
+
+    </main>
+
 </body>
 </html>
