@@ -22,8 +22,8 @@ def cadastrar(request):
         email = request.POST.get('email')
         senha = request.POST.get('senha')
 
-        data = criar_usuario(nome, email, senha)
-        if data.get('error') == 'Já existe um usuario com esse email':
+        data = criar_usuario(request, nome, email, senha)
+        if data.get('detail'):
             return render(request, 'cadastrar.html', data)
         return redirect('login')
     return render(request, 'cadastrar.html')
@@ -64,8 +64,9 @@ def home(request):
         if busca:
             resultados = buscar_livro_por_titulo(busca)
 
-            if resultados:
-                return redirect('livro', resultados['id'])
+            if resultados.get('livro'):
+                return redirect('livro', resultados.get('livro')['id'])
+            messages.error(request=request, message=resultados.get('detail'))
     return render(request, 'home.html', {'livros': livros, 'emprestimos': emprestimos.get('emprestimos')})
 
 

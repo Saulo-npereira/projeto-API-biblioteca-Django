@@ -11,7 +11,7 @@ def fazer_request(request, metodo, url, **kwargs):
 
     response = requests.request(metodo, url, **kwargs)
 
-    # 🔥 se token expirou
+    
     if response.status_code == 401:
         sucesso = refresh_token(request)
 
@@ -34,29 +34,14 @@ def pegar_headers(request):
         "Authorization": f"Bearer {token}"
     }
 
-def criar_usuario(nome: str, email: str, senha: str):
-    try:
-        response = requests.post(f'{BASE_URL}usuarios/criar_usuario',
-                                 json={
-                                     "nome": nome,
-                                     "email": email,
-                                     "senha": senha,
-                                     "admin": False
-                                 }, timeout=5)
-        if response.status_code == 200:
-            return {
-                'success': True,
-                'data': response.json()
-            }
-        return {
-            'success': False,
-            'error': response.json().get('detail')
-        }
-    except requests.exceptions.RequestException:
-        return {
-            'success': False,
-            'error': "Erro na conexão com a API"
-        }
+def criar_usuario(request, nome: str, email: str, senha: str):
+    response = fazer_request(request, 'POST', f'{BASE_URL}usuarios/criar_usuario', json={
+        "nome": nome,
+        "email": email,
+        "senha": senha,
+        "admin": False
+    })
+    return response.json()
 
 def logar_usuario(request, email: str, senha: str):
     response = fazer_request(request, 'POST' ,f'{BASE_URL}usuarios/login', json={'email': email, 'senha': senha}, timeout=5)
@@ -70,7 +55,7 @@ def listar_livros():
 
 def buscar_livro_por_titulo(titulo):
     response = requests.get(f"{BASE_URL}bibliotecas/buscar_livro_titulo/{titulo}")
-    return response.json().get("livro")
+    return response.json()
 
 def pegar_livro_por_id(id):
     response = requests.get(f"{BASE_URL}bibliotecas/buscar_livro_id/{id}")

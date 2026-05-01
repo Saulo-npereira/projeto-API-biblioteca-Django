@@ -39,7 +39,7 @@ def manipular_livro(request):
         elif acao == 'buscar':
             livro = request.POST.get('titulo')
             response = buscar_livro(request, livro)
-            if response.get('livro'):
+            if response.status_code == 200:
 
                 return render(request, 'manipularlivros.html', {'livros': [response.get('livro')]})
             return render(request, 'manipularlivros.html', {'livros': livros.get('livros'), 'message': response.get('detail')})
@@ -55,7 +55,7 @@ def editar_estoque_livro(request, id_livro):
     if request.method == 'POST':
         quantidade = request.POST.get('quantidade')
         response = editar_estoque(request, id_livro, quantidade)
-        if response.get('detail'):
+        if response.status_code == 400:
             return render(request, 'edestoque.html', response)
         return redirect('manlivro')
     return render(request, 'edestoque.html')
@@ -66,7 +66,7 @@ def manipular_usuario(request):
     if request.method == 'POST':
         email = request.POST.get('usuario')
         usuario = buscar_usuario(request, email)
-        if usuario.get('detail'): 
+        if usuario.status_code == 404: 
             return render(request, 'manipularusuario.html', {'usuarios': usuarios.get('usuarios'), 'message': usuario.get('detail')})
         return redirect('usuario', usuario['usuario'].get('id'))
     return render(request, 'manipularusuario.html', usuarios)
@@ -91,13 +91,13 @@ def manipular_emprestimo(request):
         if acao == 'usuario':
             email = request.POST.get('email')
             usuario = buscar_usuario(request, email)
-            if usuario.get('detail'):
+            if usuario.status_code == 404:
                 return render(request, 'manipularemprestimo.html', {'emps_ativos': emps_ativos.get('emprestimos_ativos'),
                                                             'emps_atrasados': emps_atrasados.get('emprestimos_atrasados'),
                                                             'message': emps_atrasados.get('message'),
                                                             'detail': usuario.get('detail')})
             emprestimos = buscar_emprestimo(request, usuario['usuario'].get('id'))
-            if emprestimos.get('detail'):
+            if emprestimos.status_code == 404:
                 return render(request, 'manipularemprestimo.html', {'emps_ativos': emps_ativos.get('emprestimos_ativos'),
                                                             'emps_atrasados': emps_atrasados.get('emprestimos_atrasados'),
                                                             'message': emps_atrasados.get('message'),
@@ -106,7 +106,7 @@ def manipular_emprestimo(request):
         elif acao == 'livro':
             titulo = request.POST.get('titulo')
             emprestimos = buscar_emprestimo_livro(request, titulo)
-            if emprestimos.get('detail'):
+            if emprestimos.status_code == 404:
                 messages.error(request=request, message=emprestimos.get('detail'))
                 return redirect('manemprestimo')
             return render(request, 'emprestimoslivro.html', emprestimos)
